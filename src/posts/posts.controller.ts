@@ -4,9 +4,9 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
   Post,
   Put,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 
@@ -24,13 +24,13 @@ export class PostsController {
     return this.postsService.findById(id);
   }
 
-  @Post
+  @Post()
   create(@Body() body: any) {
     return this.postsService.create(body);
   }
 
   @Put(':id')
-  update(@Param('id', new parseIntPipe()) id: number, @Body() body: any) {
+  update(@Param('id', new ParseIntPipe()) id: number, @Body() body: any) {
     return this.postsService.update(id, body);
   }
 
