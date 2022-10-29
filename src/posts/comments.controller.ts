@@ -4,38 +4,38 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
-  ParseIntPipe,
 } from '@nestjs/common';
-import { PostsService } from './posts.service';
+import { CommentService } from './comment.service';
 
 @Controller('posts')
-export class PostsController {
-  constructor(private readonly postsService: PostsService) {}
+export class CommentsController {
+  constructor(private readonly commentService: CommentService) {}
 
   @Get()
   findAll() {
-    return this.postsService.findAll();
+    return this.commentService.findAll();
   }
 
   @Get(':id')
   getById(@Param('id', new ParseIntPipe()) id: number) {
-    return this.postsService.findById(id);
+    return this.commentService.findById(id);
   }
 
   @Post()
   create(@Body() body: any) {
-    return this.postsService.create(body);
+    return this.commentService.create(body);
   }
 
   @Put(':id')
   update(@Param('id', new ParseIntPipe()) id: number, @Body() body: any) {
-    return this.postsService.update(id, body);
+    return this.commentService.update(id, body);
   }
 
-  @Delete('id')
+  @Delete(':id')
   delete(@Param('id', new ParseIntPipe()) id: number) {
-    this.postsService.delete(id);
+    this.commentService.delete(id);
   }
 }
